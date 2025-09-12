@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Hero() {
   return (
-    <div className="pt-[50px]">
+    <div className="pt-[5px]">
       <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
     
         <img

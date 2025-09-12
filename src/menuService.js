@@ -1,4 +1,3 @@
-// src/menuService.js
 import { GetCommand, PutCommand, ScanCommand, DeleteCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { ddbDocClient } from './aws';
 
