@@ -1,17 +1,19 @@
-import React from 'react';
-import "./styles/App.scss";
-import Hero from './Components/Hero'
-import Navbar from './Components/Navbar';
+import About from './Components/About';
 import Footer from './Components/Footer';
+import Hero from './Components/Hero';
+import Home from './Components/Home';
+import MenuComponent from './Components/Menu';
+import Navbar from './Components/Navbar';
 
-function App() {
+export default function App() {
   return (
-    <div className="h-full">
-      <Navbar/>
+    <div>
+      <Navbar />
       <Hero />
-      <Footer/>
+      <About />
+      <Home />
+      <MenuComponent />
+      <Footer />
     </div>
   );
 }
-
-export default App;

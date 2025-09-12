@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const navItems = ['Home', 'Menu', 'Reservations', 'Gallery', 'Events', 'About', 'Contact'];
+
   return (
     <header className="w-full bg-black text-white shadow-md fixed top-0 left-0 z-50">
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Brand */}
         <div className="text-xl md:text-2xl font-extrabold tracking-wide uppercase">
           Happy Hour
         </div>
 
-        {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center gap-6 text-base font-medium">
-          {['Home', 'Menu', 'Reservations', 'Gallery', 'Events', 'About', 'Contact'].map((item) => (
+          {navItems.map((item) => (
             <li key={item}>
               <a
                 href={`#${item.toLowerCase()}`}
@@ -25,7 +36,6 @@ const Navbar = () => {
           ))}
         </ul>
 
-        {/* Reserve Button (Desktop only) */}
         <div className="hidden md:block">
           <a
             href="#reservations"
@@ -35,8 +45,9 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile Menu Toggle */}
         <button
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
           className="md:hidden focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -56,10 +67,10 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile Navigation */}
+  
       {isOpen && (
         <div className="md:hidden bg-black text-white py-6 px-4 text-center space-y-4">
-          {['Home', 'Menu', 'Reservations', 'Gallery', 'Events', 'About', 'Contact'].map((item) => (
+          {navItems.map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
