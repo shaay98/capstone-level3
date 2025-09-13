@@ -1,5 +1,5 @@
 import { GetCommand, PutCommand, ScanCommand, DeleteCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
-import { ddbDocClient } from './aws';
+import { ddbDocClient } from '../aws';
 
 const TABLE_NAME = 'FoodMenu';
 

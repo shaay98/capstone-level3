@@ -55,7 +55,7 @@ export default function Footer() {
           <a href="#contact" style={styles.link}>Contact</a>
           <a href="#location" style={styles.link}>Location</a>
         </nav>
-        <p style={styles.copy}>&copy; {new Date().getFullYear()} Happy Hour. All rights reserved.</p>
+        <p style={styles.copy}>&copy; {new Date().getFullYear()} Happy Hour.</p>
       </div>
     </footer>
   );

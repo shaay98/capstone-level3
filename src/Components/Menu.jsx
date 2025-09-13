@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getMenuItems, createMenuItem, deleteMenuItem } from '../menuService';
-import { FaTrash } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import { getMenuItems, createMenuItem, deleteMenuItem } from "./menuService";
+import { FaTrash } from "react-icons/fa";
 
 export default function MenuComponent() {
   const [items, setItems] = useState([]);
@@ -14,14 +14,13 @@ export default function MenuComponent() {
     setItems(data);
   };
 
-  const handleAdd = async () => {
-    await createMenuItem({
+  const handleAdd = async (newItem) => {
+    const itemWithId = {
+      ...newItem,
       id: Date.now().toString(),
-      name: 'Sushi Roll',
-      description: 'Fresh salmon with avocado and rice.',
-      price: 14.99,
-    });
-    fetchItems();
+    };
+    await createMenuItem(itemWithId);
+    setItems((oldItems) => [...oldItems, itemWithId]);
   };
 
   const handleDelete = async (id) => {
@@ -33,11 +32,57 @@ export default function MenuComponent() {
     <section className="px-4 py-10 max-w-4xl mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Menu</h2>
+
         <button
-          onClick={handleAdd}
+          onClick={() =>
+            handleAdd({
+              name: "Margherita Pizza",
+              description: "Classic pizza with fresh mozzarella and basil.",
+              price: 10.99,
+            })
+          }
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm sm:text-base"
         >
-          Add Item
+          Add Margherita Pizza
+        </button>
+
+        <button
+          onClick={() =>
+            handleAdd({
+              name: "Chicken Alfredo Pasta",
+              description: "Creamy Alfredo sauce with grilled chicken.",
+              price: 12.49,
+            })
+          }
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm sm:text-base"
+        >
+          Add Chicken Alfredo Pasta
+        </button>
+
+        <button
+          onClick={() =>
+            handleAdd({
+              name: "Taco",
+              description: "Beef taco with lettuce, cheese, and salsa.",
+              price: 4.99,
+            })
+          }
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm sm:text-base"
+        >
+          Add Taco
+        </button>
+
+        <button
+          onClick={() =>
+            handleAdd({
+              name: "Sushi Rolls",
+              description: "Fresh salmon with avocado and rice.",
+              price: 14.99,
+            })
+          }
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm sm:text-base"
+        >
+          Add Sushi Rolls
         </button>
       </div>
 
@@ -45,20 +90,22 @@ export default function MenuComponent() {
         <table className="w-full bg-white border border-gray-200 shadow-sm rounded-lg text-sm sm:text-base">
           <thead className="bg-gray-100 text-gray-700 uppercase">
             <tr>
-              {/* Removed Image header */}
               <th className="px-4 py-3 text-left">Name</th>
               <th className="px-4 py-3 text-left">Description</th>
               <th className="px-4 py-3 text-left">Price</th>
-              <th className="px-4 py-3 text-left">Actions</th>
+              <th className="px-4 py-3 text-left">Delete</th>
             </tr>
           </thead>
           <tbody>
             {items.length > 0 ? (
               items.map((item) => (
                 <tr key={item.id} className="border-t hover:bg-gray-50">
-                  {/* Removed Image cell */}
-                  <td className="px-4 py-3 font-medium text-gray-800">{item.name}</td>
-                  <td className="px-4 py-3 text-gray-600">{item.description}</td>
+                  <td className="px-4 py-3 font-medium text-gray-800">
+                    {item.name}
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {item.description}
+                  </td>
                   <td className="px-4 py-3 text-yellow-600 font-semibold">
                     ${item.price.toFixed(2)}
                   </td>
